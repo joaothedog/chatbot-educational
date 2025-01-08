@@ -11,7 +11,7 @@ class ChatbotView(APIView):
         
         # integrar com openai
         openai.api_key = config('OPENAI_API_KEY')
-        response = openai.ChatCompletion.create(
+        response = openai.chat.completions.create(
             model="gpt-3.5-turbo",
             messages=[{"role": "user", "content": user_message}]
         )
