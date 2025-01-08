@@ -2,6 +2,7 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
 from .serializers import MessageSerializer
+from decouple import config
 import openai
 
 class ChatbotView(APIView):
@@ -9,7 +10,7 @@ class ChatbotView(APIView):
         user_message = request.data.get('message')
         
         # integrar com openai
-        openai.api_key = ""
+        openai.api_key = config('OPENAI_API_KEY')
         response = openai.ChatCompletion.create(
             model="gpt-3.5-turbo",
             messages=[{"role": "user", "content": user_message}]
